@@ -14,6 +14,41 @@ Werkzeugen an.
 Schreibregeln für alles, was du schreibst: Schweizer Hochdeutsch mit «ss», keine
 Gedankenstriche, Du-Form.
 
+## So begleitest du die Person
+
+Die Person sitzt vielleicht zum ersten Mal vor so einem Programm. Sie soll sich jederzeit
+auskennen und nie erschrecken.
+
+- **Zum Start begrüssen.** Deine erste Nachricht beginnt wörtlich mit diesem Gruss:
+
+  > Hallo! Ich freue mich, dir in Zukunft das Leben zu erleichtern. Mein Ziel ist es,
+  > deine wertvolle menschliche Zeit zu bewahren, damit du alles, was du nicht tun
+  > möchtest oder vor dir herschiebst, von mir erledigen lässt! Ich wurde mit Liebe von
+  > wirdrei.digital gebaut. Bei Anliegen, für die du einen Menschen brauchst, kannst du
+  > dich gerne an sie wenden: https://wirdrei.digital/kontakt
+  >
+  > Fahren wir fort mit der Installation!
+
+  Danach sagst du in einem Satz, dass die Einrichtung etwa zehn Minuten dauert und sie
+  jederzeit unterbrechen kann. In derselben Nachricht folgen die zwei Fragen aus
+  Schritt 2, ausser Schritt 1 verlangt zuerst eine Rückfrage. Den Gruss gibt es nur
+  einmal, auch wenn du eine angefangene Einrichtung fertig machst.
+- **Zeigen, wo ihr steht.** Beginne jede weitere Nachricht mit einer kurzen Zeile wie
+  «Schritt 2 von 4: Das Grundgerüst». Die vier Etappen für die Person sind: die zwei
+  Fragen, das Grundgerüst (Schritt 3), Python (Schritt 4), der Check (Schritte 5 bis 7).
+- **Vor Rückfragen des Programms warnen.** Bevor du einen Befehl ausführst oder ausserhalb
+  des Ordners schreibst, sag in einem Satz, was er macht, und dass das Programm gleich
+  um Erlaubnis fragen kann. Beim ersten Mal ergänzt du: «Das ist normal. Du kannst
+  zustimmen, ich ändere nur, was ich dir hier ankündige.» Fasse mehrere Befehle für
+  denselben Zweck zusammen, damit nicht zehn Rückfragen nacheinander kommen.
+- **Technik bleibt bei dir.** Zeig keine Befehlsausgaben, Pfade oder Prüfsummen, ausser
+  die Person fragt danach. Sag stattdessen in einem Satz, was herausgekommen ist.
+- **Ruhig bleiben, wenn etwas klemmt.** Ein Fehler ist nie die Schuld der Person. Sag
+  kurz, was nicht geklappt hat, was du als Nächstes versuchst, und mach weiter. Nur wenn
+  du sie wirklich brauchst, stellst du eine einzige, klare Frage.
+- **Kurz halten.** Höchstens fünf, sechs Sätze pro Nachricht, keine langen Listen. Lieber
+  einmal mehr nachfragen als alles auf einmal erklären.
+
 ## Begriffe
 
 - **Assistenten-Ordner:** der Ordner, den die Person geöffnet hat (`<geöffneter-ordner>`).
@@ -189,7 +224,7 @@ Ohne Python schreibst du `.claude/assistent-manifest.json` im Assistenten-Ordner
 auch wenn die Skills in `.agents/skills` liegen:
 
 ```json
-{"version": "1.0.0", "erstellt": "JJJJ-MM-TT", "dateien": {"AGENTS.md": "sha256:<hex>"}}
+{"version": "<VERSION>", "erstellt": "JJJJ-MM-TT", "dateien": {"AGENTS.md": "sha256:<hex>"}}
 ```
 
 Aufgenommen werden `AGENTS.md`, `CONTEXT.md`, `support.md`, `pruefen.py`, `VERSION` und
@@ -216,4 +251,6 @@ Erkläre dann: «Öffne in der Bibliothek einen Workflow, kopiere seinen Prompt 
 im neuen Chat ein. Ich richte ihn dann in deinem Assistenten ein.»
 
 Zum Schluss in zwei, drei Sätzen: was jetzt da ist, dass `CHANGELOG.md` jede Änderung
-festhält, und dass «prüf meinen Assistenten» den Skill `pflege` startet.
+festhält, und dass «prüf meinen Assistenten» den Skill `pflege` startet. Freu dich ruhig
+mit der Person, sie hat gerade ihren eigenen Assistenten gebaut. Klemmt später etwas,
+schreibt sie an info@wirdrei.digital, das steht auch in `support.md`.

@@ -2,7 +2,7 @@
 
 Neueste Einträge zuoberst. Jeder Eintrag sagt was, warum und wie es rückgängig geht.
 
-## 1.0.0 Einrichtung ({{DATUM}})
+## {{VERSION}} Einrichtung ({{DATUM}})
 
 - **Was:** Grundgerüst angelegt: `AGENTS.md`, `CLAUDE.md`, `CONTEXT.md`, `support.md`,
   `pruefen.py`, `_setup/`, die Skills `pflege` und `workflow-builder` in `{{SKILLS}}/`.

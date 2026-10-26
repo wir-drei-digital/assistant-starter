@@ -95,6 +95,19 @@ class ContentTests(unittest.TestCase):
         for call in calls:
             self.assertTrue('"<assistenten-ordner>"' in call or '"<geöffneter-ordner>"' in call, call)
 
+    def test_guides_newcomers(self):
+        """Greets with an overview, shows progress and warns before permission prompts."""
+        text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
+        start = text.find("## So begleitest du die Person")
+        self.assertNotEqual(start, -1)
+        guide = text[start:text.find("\n## ", start + 1)]
+        self.assertIn("zehn", guide)
+        self.assertIn("Fahren wir fort mit der Installation!", guide)
+        self.assertIn("https://wirdrei.digital/kontakt", guide)
+        self.assertIn("von 4", guide)
+        self.assertIn("um Erlaubnis", guide)
+        self.assertIn("nie die Schuld", guide)
+
     def test_new_chat_before_first_workflow(self):
         """Always, not only for `fremd`: rules load at the start of a chat."""
         step7 = self.section(7)

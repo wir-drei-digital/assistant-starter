@@ -123,6 +123,10 @@ nie abtippen oder neu schreiben, sonst stimmen die Prüfsummen im Manifest nicht
 - `vorlage/skills/pflege/` und `vorlage/skills/workflow-builder/` mit allen Dateien in den
   Skill-Ordner, zum Beispiel
   `cp -R "<pfad zu vorlage>/skills/pflege" "<assistenten-ordner>/.claude/skills/"`
+- danach in beiden installierten Skills `SKILL.vorlage.md` in `SKILL.md` umbenennen, mit
+  `mv` (Mac, Linux, Git Bash) oder `Rename-Item` (PowerShell). In der ZIP heissen sie
+  anders, weil Claude beim Hochladen nur eine einzige `SKILL.md` erlaubt. Der Inhalt
+  bleibt unverändert.
 - danach diese Vorlagen in den Ordner `assets/` des installierten `workflow-builder`, damit
   spätere Workflows Bereiche anlegen können:
   - `vorlage/bereich/CONTEXT.md` als `assets/bereich-CONTEXT.md`

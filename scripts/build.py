@@ -57,6 +57,11 @@ def main() -> int:
                    if p.is_file() and "__pycache__" not in p.parts and p.name not in SKIP_NAMES
                    and p.relative_to(skill_dir).as_posix() != "vorlage/VERSION")
 
+    extra = [p for p in files if p.name == "SKILL.md" and p != skill_md]
+    if extra:
+        return fail("Claude accepts only one SKILL.md per ZIP, also found "
+                    + ", ".join(p.relative_to(REPO).as_posix() for p in extra))
+
     out = REPO / "dist" / f"{SKILL}-v{version}.zip"
     out.parent.mkdir(exist_ok=True)
 

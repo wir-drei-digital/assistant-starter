@@ -134,7 +134,9 @@ python3 -m unittest discover -s tests -v   # stdlib only, Python 3.10+
 python3 scripts/build.py                   # dist/assistent-einrichten-v<VERSION>.zip and dist/assistent-einrichten.zip
 ```
 
-The ZIP root is the folder `assistent-einrichten/`; the build writes `VERSION` into
+The ZIP holds exactly one `SKILL.md`, because Claude Desktop rejects an upload with more. The
+built-in skills therefore ship as `vorlage/skills/<name>/SKILL.vorlage.md`, and the setup
+renames them to `SKILL.md` when it installs them. The ZIP root is the folder `assistent-einrichten/`; the build writes `VERSION` into
 `assistent-einrichten/vorlage/VERSION` inside the ZIP only. Pushing a tag `vX.Y.Z` that
 matches `VERSION` runs the tests on Ubuntu, macOS and Windows and then, on Ubuntu,
 attaches both ZIPs to a GitHub release (`.github/workflows/release.yml`).

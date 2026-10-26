@@ -33,6 +33,7 @@ class BuildTests(unittest.TestCase):
         with zipfile.ZipFile(self.zip_path()) as z:
             names = z.namelist()
         self.assertIn("assistent-einrichten/SKILL.md", names)
+        self.assertEqual([n for n in names if n.endswith("SKILL.md")], ["assistent-einrichten/SKILL.md"])
         self.assertIn("assistent-einrichten/vorlage/pruefen.py", names)
         self.assertTrue(all(n.startswith("assistent-einrichten/") for n in names), names)
         self.assertFalse(any("__pycache__" in n or n.endswith(".DS_Store") for n in names))

@@ -9,7 +9,8 @@ from helpers import SKILL_DIR, VORLAGE, make_runtime
 
 import pruefen
 
-SKILL_MDS = sorted(SKILL_DIR.rglob("SKILL.md"))
+# The built-in skills ship as SKILL.vorlage.md: Claude accepts only one SKILL.md per upload.
+SKILL_MDS = sorted([*SKILL_DIR.rglob("SKILL.md"), *SKILL_DIR.rglob("SKILL.vorlage.md")])
 MARKDOWN = sorted(SKILL_DIR.rglob("*.md"))
 PLACEHOLDER = re.compile(r"\{\{([A-Z_]+)\}\}")
 
@@ -69,6 +70,11 @@ class ContentTests(unittest.TestCase):
                     continue
                 base = SKILL_DIR if ref.startswith("vorlage/") else path.parent
                 self.assertTrue((base / ref).exists(), f"{path.relative_to(SKILL_DIR)}: {ref}")
+
+    def test_only_one_skill_md(self):
+        """Claude Desktop rejects a ZIP with more than one SKILL.md."""
+        self.assertEqual(list(SKILL_DIR.rglob("SKILL.md")), [SKILL_DIR / "SKILL.md"])
+        self.assertIn("SKILL.vorlage.md", (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8"))
 
     def test_setup_guards_existing_folder(self):
         text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
@@ -263,7 +269,7 @@ class ContentTests(unittest.TestCase):
     def test_router_status_coherent(self):
         context = (VORLAGE / "CONTEXT.md").read_text(encoding="utf-8")
         self.assertNotIn("im Ordner und hier", context)
-        builder = (VORLAGE / "skills" / "workflow-builder" / "SKILL.md").read_text(encoding="utf-8")
+        builder = (VORLAGE / "skills" / "workflow-builder" / "SKILL.vorlage.md").read_text(encoding="utf-8")
         self.assertNotIn("| geplant |", builder)
         self.assertIn("| eingerichtet |", builder)
         self.assertIn("Haupt-Router", self.builder_phase_g(builder))
@@ -278,7 +284,7 @@ class ContentTests(unittest.TestCase):
         return re.search(r"(?ms)^## Testlauf.*", text).group(0)
 
     def test_secrets_file_opened_for_the_person(self):
-        builder = (VORLAGE / "skills" / "workflow-builder" / "SKILL.md").read_text(encoding="utf-8")
+        builder = (VORLAGE / "skills" / "workflow-builder" / "SKILL.vorlage.md").read_text(encoding="utf-8")
         for needle in ('open -e "<datei>"', 'start "" notepad "<datei>"',
                        'Start-Process notepad "<datei>"', "<laufzeitordner>/secrets/<dienst>.env"):
             self.assertIn(needle, builder)
@@ -295,7 +301,7 @@ class ContentTests(unittest.TestCase):
         self.assertIn("nie neu", step4)
 
     def test_python_fallback_documented(self):
-        for path in (SKILL_DIR / "SKILL.md", VORLAGE / "skills" / "pflege" / "SKILL.md"):
+        for path in (SKILL_DIR / "SKILL.md", VORLAGE / "skills" / "pflege" / "SKILL.vorlage.md"):
             self.assertIn("ohne python", path.read_text(encoding="utf-8").lower(), path)
 
     def test_agents_md_length_and_sections(self):
@@ -343,6 +349,8 @@ class ContentTests(unittest.TestCase):
             except OSError:  # Windows without the symlink privilege
                 (root / "CLAUDE.md").write_text("@AGENTS.md\n", encoding="utf-8")
             shutil.copytree(VORLAGE / "skills", root / skills)
+            for template in (root / skills).glob("*/SKILL.vorlage.md"):
+                template.rename(template.with_name("SKILL.md"))
             assets = root / skills / "workflow-builder" / "assets"
             assets.mkdir()
             shutil.copy2(VORLAGE / "bereich" / "CONTEXT.md", assets / "bereich-CONTEXT.md")

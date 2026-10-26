@@ -108,7 +108,7 @@ class ContentTests(unittest.TestCase):
         self.assertNotEqual(start, -1)
         guide = text[start:text.find("\n## ", start + 1)]
         self.assertIn("zehn", guide)
-        self.assertIn("Fahren wir fort mit der Installation!", guide)
+        self.assertIn("Starten wir die Installation! Ich freue mich!", guide)
         self.assertIn("https://wirdrei.digital/kontakt", guide)
         self.assertIn("von 4", guide)
         self.assertIn("um Erlaubnis", guide)
